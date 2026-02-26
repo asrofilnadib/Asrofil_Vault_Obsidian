@@ -1,0 +1,2 @@
+- [x] ➕ 2025-11-17 mesin FTN52 pada equipment *PUMP KETCHUP SYSTEM* serta *PUMP SAUCE SYStEM* tidak muncul kerusakannya 🔼 📅 2025-11-17 ✅ 2025-11-20
+	- tinggal menambahkan data kerusakan pada mesin FTN52 di master data

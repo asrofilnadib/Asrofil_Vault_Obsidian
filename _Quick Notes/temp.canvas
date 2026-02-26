@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"3a15e9ca044e6cb5","type":"text","text":"Brainstorming1","x":-260,"y":-320,"width":250,"height":95},
+		{"id":"b5ba1823f20cad48","type":"text","text":"Ideas 1\n","x":40,"y":-68,"width":250,"height":88},
+		{"id":"8fd89d5780374ebb","type":"text","text":"ideas 2","x":-340,"y":0,"width":250,"height":66}
+	],
+	"edges":[
+		{"id":"5ada0c20adaa5250","fromNode":"8fd89d5780374ebb","fromSide":"top","toNode":"b5ba1823f20cad48","toSide":"left"},
+		{"id":"44194724c619c53c","fromNode":"b5ba1823f20cad48","fromSide":"top","toNode":"3a15e9ca044e6cb5","toSide":"right"}
+	]
+}

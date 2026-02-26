@@ -1,0 +1,1 @@
+- [ ] ➕ 2026-01-27 di dashborad buat ketika sistem di klik maka memunculkan data detail dari help-dev: report bug berapa;

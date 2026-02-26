@@ -1,0 +1,3 @@
+- [x] ➕ 2025-11-17 add kio3 parameter calculation to fisika-kimia master data 🔼 📅 2025-11-18 ✅ 2025-11-18
+- [x] ➕ 2025-11-19 tambahin viskositas pada halaman report 🔼 📅 2025-11-20 ✅ 2025-11-20
+- [ ] 

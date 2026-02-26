@@ -1,0 +1,26 @@
+➕ 2025-07-30 yang dapat diimprove dari aplikasi kastara:
+
+- [x] ➕ 2025-07-30 footer content stick to the bottom #Easy ⏬ 📅 2025-07-31 ✅ 2025-07-30
+- [ ] ➕ 2025-07-30 untuk recomendation product diberikan dari sesuai dengan preferensi, gunakan deep learning untuk mengetahui preferensi dari user🔼  #Hard  
+- [ ] ➕ 2025-07-30 integrated contact to my email🔽 #Easy 
+- [x] ➕ 2025-07-30 cart, sudah cukup baik dari segi UI, tapi untuk notifikasi dari banyaknya barang yang masuk itu perlu di konfigurasikan #Easy 🔽 📅 2025-07-31 ✅ 2025-07-31
+- [ ] ➕ 2025-07-30 search field, buatlah auto-suggestion untuk tiap huruf yang di berikan 🔼  #Struggle
+- [x] ➕ 2025-07-30 order list, dari tampilan haruslah lebih clean #Easy 🔽 📅 2025-08-01 ✅ 2025-07-31
+- [x] ➕ 2025-07-30 tampilan ui halaman login & regist diubah terutama image-nya #Easy 🔽 📅 2025-08-01 ✅ 2025-07-31
+- [ ] ➕ 2025-07-30 admin: #Struggle 🔼 
+	- dashboard, 
+		- container quantity untuk melihat banyak orderan ditambah dengan filter pertahun/bulan/hari atau dibuat range aja
+		- revenue pendapatan dengan filter yang sama seperti container quantity
+		- grafik line chart revenue pertahun/perkuartal/perbulan
+		- table user yang telah melakukan pembelian dengan filter dari dataTable tetunya
+	- manage product,
+		- form create product dapat di improve dari segi UI
+		- container manage product juga dapat di improve dari segi UI 
+- [x] ➕ 2025-07-30 Mata uang yang digunakan diubah dari yang tadinya us dollar menjadi rupiah #Easy 🔼 📅 2025-08-08 ✅ 2025-08-01
+- [ ] ➕ 2025-07-30 integrated with payment gateway⏫ #Hard 
+- [x] ➕ 2025-08-01 user can increase or decrease quantity of their choosen product in cart #Struggle 🔼 📅 2025-08-08 ✅ 2025-08-01
+- [x] ➕ 2025-08-04 update style of product page 🔽 📅 2025-08-04 ✅ 2025-08-04
+- [x] ➕ 2025-08-04 change geography api from using gmaps to leafleat in contact 🔽 📅 2025-08-04 ✅ 2025-08-04
+- [x] ➕ 2025-08-04 update style of about page 🔽 📅 2025-08-04 ✅ 2025-08-04
+- [ ] ➕ 2025-08-07 configure sales from online and offline 🔼 
+- [ ] ➕ 2025-08-14 create adding product page for an offline channel 🔼 

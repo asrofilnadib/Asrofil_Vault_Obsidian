@@ -1,0 +1,1 @@
+https://portal3.incoe.astra.co.id/qa-investigation-report/public/investigation

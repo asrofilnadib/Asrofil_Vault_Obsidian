@@ -1,0 +1,315 @@
+{
+  "main": {
+    "id": "c93f96aceecc81e6",
+    "type": "split",
+    "children": [
+      {
+        "id": "86a8c07f39d95080",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "522af79134c67f97",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Work/🍜 PAS/Smart Lab.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Smart Lab"
+            }
+          },
+          {
+            "id": "86afa7d22a0c7bea",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Work/🍜 PAS/Digitalisasi P2H.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Digitalisasi P2H"
+            }
+          },
+          {
+            "id": "5102f808776289bf",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Coding/Command Prompting/Ubuntu Command.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ubuntu Command"
+            }
+          }
+        ],
+        "currentTab": 2
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "fd95f021a0c2c356",
+    "type": "split",
+    "children": [
+      {
+        "id": "81733a6fd3195ca5",
+        "type": "tabs",
+        "dimension": 65.90361445783132,
+        "children": [
+          {
+            "id": "0643b40abd8ad1cc",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "e9e4d2a3c7090112",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tmux",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "537e9f74c1a55a8c",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      },
+      {
+        "id": "4791452d5f94a8ad",
+        "type": "tabs",
+        "dimension": 34.096385542168676,
+        "children": [
+          {
+            "id": "2f379d68dc72ae1e",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 299.5026054382324
+  },
+  "right": {
+    "id": "3f52144e05ccb070",
+    "type": "split",
+    "children": [
+      {
+        "id": "5d213028e5f59644",
+        "type": "tabs",
+        "dimension": 59.7254004576659,
+        "children": [
+          {
+            "id": "aa15e59b68016e92",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "91ef3d991e37cd05",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": true,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "9eabc352c5176ec8",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "56d57b1e45c47d08",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Coding/Command Prompting/Ubuntu Command.md",
+                "followCursor": true,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Ubuntu Command"
+            }
+          },
+          {
+            "id": "130d6ede2cc1a60b",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "advanced-tables-toolbar"
+            }
+          },
+          {
+            "id": "bc2a8b4632b2a0e0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "git-view"
+            }
+          }
+        ],
+        "currentTab": 3
+      },
+      {
+        "id": "f72f4eb00ee1c409",
+        "type": "tabs",
+        "dimension": 40.274599542334094,
+        "children": [
+          {
+            "id": "65d40e487b55a226",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {},
+              "icon": "calendar-with-checkmark",
+              "title": "Calendar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 273.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "publish:Publish changes...": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-importer:Open Importer": false,
+      "omnisearch:Omnisearch": false,
+      "templater-obsidian:Templater": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "obsidian-git:Open Git source control": false,
+      "remotely-save:Remotely Save": false
+    }
+  },
+  "active": "5102f808776289bf",
+  "lastOpenFiles": [
+    "Work/Side Project/Server Setup Debian.md",
+    "Main Dash.md",
+    "Coding/Command Prompting/Ubuntu Command.md",
+    "Coding/Command Prompting/Git Command.md",
+    "Work/Side Project/Judi Online - asrofil999.md",
+    "Work/Side Project",
+    "Work/Untitled.md",
+    "Coding/Command Prompting/Laravel Debugging & Troubleshooting.md",
+    "Files/Aliases .bashrc.md",
+    "Work/🍜 PAS/Digitalisasi P2H.md",
+    "Work/🍜 PAS/Smart Lab.md",
+    "Work/🍜 PAS/Truck Management System.md",
+    "Coding/Library/Document of Dependencies.md",
+    "Coding/Problem Solve/UBUNTU/Auto-Window Management with Devilspie2 on Ubuntu.md",
+    "Coding/Problem Solve/UBUNTU/Tmux Layout Automation & Custom Startup via .bashrc.md",
+    "Coding/Problem Solve/UBUNTU/support highlight copas tmux.md",
+    "Coding/Problem Solve/UBUNTU/Mengonfigurasi dan Menjalankan OpenVPN Client di Ubuntu 24.04.md",
+    "Coding/Problem Solve/UBUNTU/install tmux for ubuntu.md",
+    "Coding/Problem Solve/UBUNTU/Install GNOME Desktop & Essential Extensions on Ubuntu 24.04.md",
+    "Coding/Problem Solve/UBUNTU/give permission to spesific folder.md",
+    "Work/🍜 PAS/Modbus Scanner.md",
+    "Work/🍜 PAS/SP Online.md",
+    "Work/🍜 PAS/Knowledge Application of PAS.md",
+    "Personal/IDEOLOGY.md",
+    "Archive/Files/Pasted image 20251029084630.png",
+    "Archive/Files/Pasted image 20250718200134.png",
+    "Work/🍜 PAS/Digitalisasi P2H - Flowchart.drawio.md",
+    "Archive/Files/Untitled.canvas",
+    "Archive/Files/Untitled 1.base",
+    "Archive/Files/Untitled.base",
+    "Archive/Files/NoteGPT_MindMap_1758091802273.png",
+    "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM 2.jpeg",
+    "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM 1.jpeg",
+    "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM.jpeg",
+    "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM 1.jpeg",
+    "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM.jpeg",
+    "Archive/Files/SJ 1266 SUMUR 11 OKTOBER 2025.pdf",
+    "Archive/Files",
+    "Work/🍜 PAS/Files/Nama Analis.xls",
+    "Work/🍜 PAS/Files/Reservasi_SFG_2B_1.xls",
+    "Work/🍜 PAS/Files/Reservasi_SFG_2B_0.xls",
+    "Work/🍜 PAS/Files/Reservasi_SFG_2B 1.xls",
+    "Work/🍜 PAS/Files/Reservasi_SFG_2B.xls",
+    "Work/🍜 PAS/IMG/Screenshot from 2026-01-05 14-56-39.png",
+    "Work/🍜 PAS/IMG/Screenshot from 2025-12-30 14-32-49.png",
+    "Work/🍜 PAS/Verifikasi Hygiene.md",
+    "Work/🍜 PAS/Table department of PAS.md",
+    "Untitled.canvas",
+    "_Quick Notes/temp.canvas"
+  ]
+}
