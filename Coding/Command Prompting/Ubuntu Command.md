@@ -59,6 +59,11 @@ sudo update-grub
 sudo update-alternatives --config php
 ```
 
+### Install application .deb
+```bash
+sudo apt install <path>
+```
+
 ---
 
 ## Network & Process Management

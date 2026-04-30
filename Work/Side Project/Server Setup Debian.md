@@ -178,24 +178,35 @@ mkdir -p ~/docker/portainer
 cd ~/docker/portainer
 ```
 
+**Cara 1: Download compose file resmi**
+```bash
+curl -L https://downloads.portainer.io/ce-sts/portainer-compose.yaml -o portainer-compose.yaml
+docker compose -f portainer-compose.yaml up -d
+```
+
+**Cara 2: Buat manual**
+
 Buat file `docker-compose.yml`:
 ```yaml
-version: '3.8'
-
 services:
   portainer:
-    image: portainer/portainer-ce:latest
     container_name: portainer
+    image: portainer/portainer-ce:sts
     restart: always
-    ports:
-      - "8000:8000"   # Portainer API
-      - "9443:9443"   # HTTPS Web UI
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+    ports:
+      - 9443:9443   # HTTPS Web UI
+      - 8000:8000   # Portainer API (optional, buat Edge Agents)
 
 volumes:
   portainer_data:
+    name: portainer_data
+
+networks:
+  default:
+    name: portainer_network
 ```
 
 Jalankan:
@@ -206,10 +217,14 @@ docker compose up -d
 ### Akses Portainer
 
 Setelah container jalan, akses Portainer di:
-- **HTTPS:** `https://<server-ip>:9443` atau `https://<tailscale-ip>:9443`
-- **HTTP:** `http://<server-ip>:9000` (kalo port 9000 dipake)
+- **HTTPS:** `https://localhost:9443` atau `https://<server-ip>:9443` atau `https://<tailscale-ip>:9443`
 
-Pas pertama kali buka, lu bakal diminta bikin admin user.
+Pas pertama kali buka, lu bakal diminta bikin admin user dan password.
+
+**Catatan:**
+- Port 8000 cuma perlu kalo lu mau pake Edge compute features
+- Portainer generate self-signed SSL certificate otomatis buat port 9443
+- Kalo butuh HTTP port 9000 (legacy), tambahin `-p 9000:9000` di ports
 
 ### Storage Portainer
 
@@ -221,8 +236,25 @@ Portainer nyimpen datanya di volume `portainer_data`. Data ini termasuk:
 
 **Lokasi:** Data tersimpan di Docker volume, bisa di-backup dengan:
 ```bash
-docker run --rm -v portainer_data:/data -v $(pwd):/backup alpine tar czf /backup/portainer-backup.tar.gz /data
+docker run --rm -v portainer_data:/data -v $(pwd):/backup alpine tar czf /backup/portainer-backup-$(date +%Y%m%d).tar.gz /data
 ```
+
+**Update Portainer:**
+```bash
+cd ~/docker/portainer
+
+# Pull latest image
+docker compose pull
+
+# Restart dengan versi baru
+docker compose up -d
+```
+
+**Tips:**
+- Portainer generate self-signed SSL certificate otomatis buat port 9443
+- Kalo mau pake SSL certificate sendiri, bisa setup via Portainer UI setelah instalasi
+- Port 8000 cuma perlu kalo lu mau pake Edge Agents (optional)
+- Portainer bakal auto-update kalo lu set label `io.portainer.update` di container
 
 ---
 
@@ -242,39 +274,48 @@ cd ~/docker/jellyfin
 
 Buat `docker-compose.yml`:
 ```yaml
-version: '3.8'
-
 services:
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: jellyfin/jellyfin
     container_name: jellyfin
-    restart: unless-stopped
+    # Optional - specify uid:gid kalo mau run sebagai user tertentu
+    # user: uid:gid
     ports:
-      - "8096:8096"   # Web UI
-      - "8920:8920"   # HTTPS (optional)
+      - 8096:8096/tcp   # Web UI
+      - 7359:7359/udp   # Auto-discovery (optional)
     volumes:
-      - ./config:/config
-      - ./cache:/cache
-      - /path/to/media:/media:ro  # Ganti dengan path media lu
+      - /path/to/config:/config
+      - /path/to/cache:/cache
+      - type: bind
+        source: /path/to/media
+        target: /media
+    restart: unless-stopped
+    # Optional - alternative address untuk autodiscovery
     environment:
       - JELLYFIN_PublishedServerUrl=https://jellyfin.your-tailnet.ts.net
-    networks:
-      - jellyfin-net
-
-networks:
-  jellyfin-net:
-    driver: bridge
 ```
 
-**Catatan:** Ganti `/path/to/media` dengan lokasi media lu. Kalo punya beberapa folder (movies, tv shows, music), tambahin volume lagi:
+**Catatan Penting:**
+- Ganti `/path/to/config`, `/path/to/cache`, dan `/path/to/media` dengan lokasi yang sesuai
+- Kalo punya beberapa media library, tambahin bind mount lagi:
 ```yaml
 volumes:
-  - ./config:/config
-  - ./cache:/cache
-  - /mnt/storage/movies:/media/movies:ro
-  - /mnt/storage/tvshows:/media/tvshows:ro
-  - /mnt/storage/music:/media/music:ro
+  - /path/to/config:/config
+  - /path/to/cache:/cache
+  - type: bind
+    source: /mnt/storage/movies
+    target: /media/movies
+    read_only: true
+  - type: bind
+    source: /mnt/storage/tvshows
+    target: /media/tvshows
+    read_only: true
 ```
+
+**Tips:**
+- Kalo mau pake hardware acceleration, perlu mount `/dev/dri` device
+- Port 7359 UDP buat DLNA auto-discovery (optional)
+- Kalo mau pake custom fonts buat subtitle burn-in, mount folder fonts juga
 
 #### Storage Jellyfin
 
@@ -294,6 +335,17 @@ volumes:
 - Local: `http://localhost:8096`
 - Via Tailscale: `http://<tailscale-ip>:8096` atau setup reverse proxy
 
+**Update Jellyfin:**
+```bash
+cd ~/docker/jellyfin
+
+# Pull latest image
+docker compose pull
+
+# Restart dengan versi baru
+docker compose up -d
+```
+
 ---
 
 ### 📸 Immich Container
@@ -302,30 +354,46 @@ Immich buat self-hosted photo management - kayak Google Photos tapi private.
 
 #### Docker Compose untuk Immich
 
-Immich butuh beberapa service (database, Redis, dll). Download compose file resmi:
+Immich butuh beberapa service (database, Redis, dll). Download compose file resmi dari releases:
 
 ```bash
 mkdir -p ~/docker/immich
 cd ~/docker/immich
 
-# Download docker-compose.yml dari GitHub
-curl -o docker-compose.yml https://raw.githubusercontent.com/immich-app/immich/main/docker/docker-compose.yml
+# Download docker-compose.yml dari latest release
+wget -O docker-compose.yml https://github.com/immich-app/immich/releases/latest/download/docker-compose.yml
 
-# Download .env.example
-curl -o .env.example https://raw.githubusercontent.com/immich-app/immich/main/docker/.env.example
-
-# Copy jadi .env
-cp .env.example .env
-
-# Edit .env file - set storage locations
-nano .env
+# Download .env file dari latest release
+wget -O .env https://github.com/immich-app/immich/releases/latest/download/example.env
 ```
 
-Di file `.env`, set lokasi storage:
+**Edit file `.env`** - set lokasi storage dan password:
 ```env
+# Lokasi upload files (foto/video)
 UPLOAD_LOCATION=./library
+
+# Lokasi database files (network shares tidak didukung!)
 DB_DATA_LOCATION=./postgres
+
+# Timezone (optional, uncomment dan set)
+# TZ=Asia/Jakarta
+
+# Immich version (bisa pin ke versi spesifik seperti "v2.1.0")
+IMMICH_VERSION=v2
+
+# Database password (GANTI dengan password yang kuat!)
+# Hanya pakai karakter A-Za-z0-9, tanpa special characters
+DB_PASSWORD=postgres
+
+# Values di bawah ini tidak perlu diubah
+DB_USERNAME=postgres
+DB_DATABASE_NAME=immich
 ```
+
+**Tips:**
+- `DB_PASSWORD` harus diganti dengan password yang kuat (pake `pwgen` kalo perlu)
+- `UPLOAD_LOCATION` harus folder baru dengan space yang cukup
+- `DB_DATA_LOCATION` tidak bisa pakai network shares
 
 Jalankan:
 ```bash
@@ -351,45 +419,89 @@ docker compose up -d
 - Local: `http://localhost:2283`
 - Via Tailscale: `http://<tailscale-ip>:2283`
 
+**Update Immich:**
+```bash
+cd ~/docker/immich
+
+# Pull latest images
+docker compose pull
+
+# Restart dengan versi baru
+docker compose up -d
+```
+
 **Tips:**
 - Immich bakal scan semua foto/video di library folder
 - Proses scan bisa lama kalo library-nya besar
 - Monitor disk space - Immich bakal track available space di `UPLOAD_LOCATION`
+- Kalo dapet error `can't set healthcheck.start_interval as feature require Docker Engine v25 or later`, comment out line `start_interval` di section `database` di `docker-compose.yml`
+- Jangan mount `upload/` dan `library/` folder secara terpisah kalo mereka di device yang sama (karena Docker bind mount properties)
+- Restart Immich setelah ubah config: `docker compose restart` atau `docker compose up -d`
 
 ---
 
 ### 📁 Beszel Container
 
-> **Catatan:** Beszel mungkin typo atau aplikasi yang kurang umum. Kalo lu maksud aplikasi lain, kasih tau ya. Buat sekarang gw buat template generic dulu.
+Beszel itu monitoring tool buat server - tracking system resources, health checks, notifications, dll.
 
-Buat Beszel, setup-nya mirip dengan container lain. Kalo lu punya docker-compose atau image-nya, bisa ikutin struktur yang sama.
+#### Docker Compose untuk Beszel
 
-#### Template Docker Compose
-
-```yaml
-version: '3.8'
-
-services:
-  beszel:
-    image: beszel/beszel:latest  # Ganti dengan image yang bener
-    container_name: beszel
-    restart: unless-stopped
-    ports:
-      - "8080:8080"  # Sesuaiin dengan port yang dibutuhkan
-    volumes:
-      - ./config:/config
-      - ./data:/data
-    environment:
-      - ENV_VAR=value
-    networks:
-      - beszel-net
-
-networks:
-  beszel-net:
-    driver: bridge
+Buat folder:
+```bash
+mkdir -p ~/docker/beszel
+cd ~/docker/beszel
 ```
 
-**Kalo lu punya info lebih tentang Beszel, kasih tau ya biar gw update bagian ini.**
+Buat `docker-compose.yml`:
+```yaml
+services:
+  beszel:
+    image: henrygd/beszel
+    container_name: beszel
+    restart: unless-stopped
+    environment:
+      - APP_URL=http://localhost:8090  # Ganti dengan URL lu (domain atau IP)
+    ports:
+      - 8090:8090
+    volumes:
+      - ./beszel_data:/beszel_data
+```
+
+Jalankan:
+```bash
+docker compose up -d
+```
+
+**Catatan:** Ganti `APP_URL` dengan URL yang bakal lu pake buat akses Beszel. Contoh:
+- Kalo via Tailscale: `APP_URL=http://beszel.your-tailnet.ts.net:8090`
+- Kalo via local IP: `APP_URL=http://192.168.1.100:8090`
+
+#### Storage Beszel
+
+| Tipe Data | Lokasi | Ukuran Estimasi |
+|-----------|--------|-----------------|
+| Config & Data | `./beszel_data` | Relatif kecil (~10-100MB) |
+
+**Akses:**
+- Local: `http://localhost:8090`
+- Via Tailscale: `http://<tailscale-ip>:8090` atau setup reverse proxy
+
+**Update Beszel:**
+```bash
+cd ~/docker/beszel
+
+# Pull latest image
+docker compose pull
+
+# Restart dengan versi baru
+docker compose up -d
+```
+
+**Tips:**
+- Beszel bisa monitor Docker containers, system resources, disk usage, dll
+- Bisa setup notifications ke berbagai platform (Discord, Telegram, dll)
+- Check [Beszel Docs](https://www.beszel.dev/guide/) buat konfigurasi lebih lanjut
+- Kalo mau pake Beszel Agent (buat monitor host), perlu setup agent container terpisah
 
 ---
 
@@ -399,11 +511,17 @@ Nextcloud AIO (All-in-One) itu versi yang udah include semua yang dibutuhkan. Se
 
 #### Prerequisites
 
-Pastikan lu udah:
-- ✅ Setup Tailscale (lihat bagian [[#🔐 Tailscale Configuration|Tailscale Configuration]])
+**PENTING BANGET:** Pastikan lu udah:
+- ✅ **Install Tailscale di HOST Debian dulu!** Ini wajib - host harus connected ke Tailnet sebelum setup Nextcloud AIO
+- ✅ Setup Tailscale di host (lihat bagian [[#🔐 Tailscale Configuration|Tailscale Configuration]])
 - ✅ Generate OAuth Client di Tailscale Admin Console
 - ✅ Enable HTTPS Certificates di Tailscale
 - ✅ Buat tag `nextcloud` di ACL
+
+**Kenapa host harus di Tailnet?**
+- Container Nextcloud perlu resolve domain Tailscale dari dalam container
+- Kalo host ga di Tailnet, DNS resolution bakal gagal dan container ga bisa connect
+- Ini salah satu masalah paling umum yang bikin setup gagal!
 
 #### Setup Nextcloud AIO
 
@@ -570,11 +688,15 @@ docker compose logs --follow
 ```
 
 Pas pertama kali, lu bakal diminta:
-1. Masukin domain yang udah lu set di `NC_DOMAIN`
+1. Masukin domain yang udah lu set di `NC_DOMAIN` (format: `nextcloud.your-tailnet.ts.net`)
 2. Ikutin setup wizard
 3. Set admin user dan password
 
+**PENTING:** Domain yang lu masukin harus sesuai dengan **ephemeral hostname** yang dibuat Tailscale, bukan hostname fisik server lu. Cek di [Tailscale Admin Console](https://login.tailscale.com/admin/machines) buat liat hostname yang bener.
+
 Setelah setup selesai, akses Nextcloud di: `https://nextcloud.your-tailnet.ts.net`
+
+**Catatan:** Kalo setup domain salah pertama kali, lu harus reset semua volumes karena domain tidak bisa diubah setelah setup awal.
 
 #### Storage Nextcloud
 
@@ -599,17 +721,52 @@ Setelah setup selesai, akses Nextcloud di: `https://nextcloud.your-tailnet.ts.ne
 
 | Masalah | Solusi |
 |---------|--------|
-| Container ga connect | Pastikan host juga di Tailnet: install Tailscale di host |
-| Domain ga resolve | Cek di Tailscale Admin Console, pastikan machine muncul |
-| Apache unhealthy | Cek log: `docker logs nextcloud-aio-apache` |
-| Caddy error | Cek `Caddyfile` - pastikan `{$NC_DOMAIN}` format benar |
-| OAuth key invalid | Generate ulang di Tailscale Admin Console |
+| Container ga connect | **Pastikan host juga di Tailnet!** Install Tailscale di host Debian dulu |
+| Domain ga resolve | Cek di Tailscale Admin Console, pastikan machine muncul. Cek juga hostname yang dipake |
+| Apache unhealthy | Cek log: `docker logs nextcloud-aio-apache`. Biasanya karena DNS resolution issue |
+| cURL error 6: Could not resolve host | Host belum di Tailnet atau domain format salah. Pastikan host connected ke Tailnet |
+| Caddy error | Cek `Caddyfile` - pastikan `{$NC_DOMAIN}` format benar (jangan manual replace!) |
+| OAuth key invalid | Generate ulang di Tailscale Admin Console. Pastikan pilih tag `nextcloud` |
+| Ephemeral hostname issue | Hostname yang dipake adalah yang dibuat Tailscale, bukan hostname fisik server |
+| Collabora ga jalan | Pastikan host juga di Tailnet. Restart containers setelah host connected |
+| Container restart terus | Cek OAuth key, ACL settings, dan pastikan network `nextcloud-aio` dibuat dengan benar |
+
+**Skenario Troubleshooting Detail:**
+
+**Kalo dapet error "Could not resolve host":**
+```bash
+# 1. Pastikan host di Tailnet
+sudo tailscale status
+
+# 2. Cek DNS resolution dari host
+nslookup nextcloud.your-tailnet.ts.net
+
+# 3. Cek DNS resolution dari dalam container
+docker exec -it nextcloud-aio-nextcloud nslookup nextcloud.your-tailnet.ts.net
+
+# 4. Kalo masih ga bisa, reset network
+docker compose down
+docker network rm nextcloud-aio
+docker compose up -d
+```
+
+**Kalo Apache container unhealthy:**
+```bash
+# Cek healthcheck manual
+docker exec -it nextcloud-aio-apache bash -x /healthcheck.sh
+
+# Biasanya masalahnya di DNS resolution ke domain Tailscale
+# Pastikan host connected ke Tailnet!
+```
 
 **Tips Penting:**
-- **Host harus di Tailnet juga!** Install Tailscale di host Debian lu
-- Domain format harus: `{hostname}.{tailnet-domain}.ts.net`
+- **Host HARUS di Tailnet juga!** Install Tailscale di host Debian lu dulu sebelum setup Nextcloud AIO
+- Domain format harus: `{hostname}.{tailnet-domain}.ts.net` (contoh: `nextcloud.tail6c5f4d.ts.net`)
+- Hostname yang dipake adalah **ephemeral hostname** yang dibuat Tailscale, bukan hostname fisik server lu
 - Kalo container restart terus, cek OAuth key dan ACL settings
+- Kalo domain ga resolve dari dalam container, pastikan host juga connected ke Tailnet
 - Buat reset total: `docker compose down --volumes` (hati-hati, hapus semua data!)
+- Kalo Apache container unhealthy, biasanya karena DNS resolution issue - pastikan host di Tailnet
 
 ---
 
@@ -729,9 +886,12 @@ watch -n 1 df -h
 
 - [Tailscale Docs](https://tailscale.com/kb/)
 - [Docker Docs](https://docs.docker.com/)
-- [Nextcloud AIO GitHub](https://github.com/nextcloud/all-in-one)
+- [Portainer Docs](https://docs.portainer.io/)
+- [Beszel Docs](https://www.beszel.dev/guide/)
 - [Jellyfin Docs](https://jellyfin.org/docs/)
-- [Immich Docs](https://immich.app/docs/)
+- [Immich Docs](https://docs.immich.app/)
+- [Nextcloud AIO GitHub](https://github.com/nextcloud/all-in-one)
+- [Nextcloud AIO Tailscale Guide](https://github.com/nextcloud/all-in-one/discussions/5439)
 
 ---
 

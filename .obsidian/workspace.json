@@ -22,21 +22,7 @@
             }
           },
           {
-            "id": "86afa7d22a0c7bea",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Work/🍜 PAS/Digitalisasi P2H.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Digitalisasi P2H"
-            }
-          },
-          {
-            "id": "5102f808776289bf",
+            "id": "fc85c7ccc42e3a9b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -47,6 +33,16 @@
               },
               "icon": "lucide-file",
               "title": "Ubuntu Command"
+            }
+          },
+          {
+            "id": "1f52eb808382b25d",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ],
@@ -125,7 +121,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5026054382324
+    "width": 299.5026054382324,
+    "collapsed": true
   },
   "right": {
     "id": "3f52144e05ccb070",
@@ -188,13 +185,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Coding/Command Prompting/Ubuntu Command.md",
-                "followCursor": true,
-                "showSearch": true,
+                "file": "Barrier Gate 15 April 2026.md",
+                "followCursor": false,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Ubuntu Command"
+              "title": "Outline of Barrier Gate 15 April 2026"
             }
           },
           {
@@ -239,7 +236,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 273.5
+    "width": 273.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -260,35 +258,44 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "5102f808776289bf",
+  "active": "1f52eb808382b25d",
   "lastOpenFiles": [
-    "Work/Side Project/Server Setup Debian.md",
-    "Main Dash.md",
-    "Coding/Command Prompting/Ubuntu Command.md",
-    "Coding/Command Prompting/Git Command.md",
-    "Work/Side Project/Judi Online - asrofil999.md",
+    "01 Mei 2026.md",
+    "Personal/Ayah Rumah Tangga.md",
+    "Personal/Trigger from behind the curtain.md",
+    "Personal/The true meaning of Wealth.md",
+    "Personal/The Ring of Gyges.md",
+    "Personal/Reflection of Life & Death.md",
+    "Personal/Read more about Reflection of Ourselves.md",
+    "Personal/Pentingnya Baca Novel.md",
+    "Personal/instability of decision-making.md",
+    "Personal/Definition of Decision Making.md",
+    "Work/CBI/portal investigation report.md",
+    "Work/🍜 PAS/01 Mei 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 28 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 27 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 23 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 22 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 21 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 20 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 16 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 15 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 14 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 13 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 10 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 09 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate",
+    "Barrier Gate 28 April 2026.md",
+    "Barrier Gate 27 April 2026.md",
+    "Untitled.base",
+    "Untitled 2.base",
+    "Untitled 1.base",
+    "Clippings",
+    "Coding/VPS",
+    "Coding/VPS",
     "Work/Side Project",
-    "Work/Untitled.md",
-    "Coding/Command Prompting/Laravel Debugging & Troubleshooting.md",
-    "Files/Aliases .bashrc.md",
-    "Work/🍜 PAS/Digitalisasi P2H.md",
-    "Work/🍜 PAS/Smart Lab.md",
-    "Work/🍜 PAS/Truck Management System.md",
-    "Coding/Library/Document of Dependencies.md",
-    "Coding/Problem Solve/UBUNTU/Auto-Window Management with Devilspie2 on Ubuntu.md",
-    "Coding/Problem Solve/UBUNTU/Tmux Layout Automation & Custom Startup via .bashrc.md",
-    "Coding/Problem Solve/UBUNTU/support highlight copas tmux.md",
-    "Coding/Problem Solve/UBUNTU/Mengonfigurasi dan Menjalankan OpenVPN Client di Ubuntu 24.04.md",
-    "Coding/Problem Solve/UBUNTU/install tmux for ubuntu.md",
-    "Coding/Problem Solve/UBUNTU/Install GNOME Desktop & Essential Extensions on Ubuntu 24.04.md",
-    "Coding/Problem Solve/UBUNTU/give permission to spesific folder.md",
-    "Work/🍜 PAS/Modbus Scanner.md",
-    "Work/🍜 PAS/SP Online.md",
-    "Work/🍜 PAS/Knowledge Application of PAS.md",
-    "Personal/IDEOLOGY.md",
     "Archive/Files/Pasted image 20251029084630.png",
     "Archive/Files/Pasted image 20250718200134.png",
-    "Work/🍜 PAS/Digitalisasi P2H - Flowchart.drawio.md",
     "Archive/Files/Untitled.canvas",
     "Archive/Files/Untitled 1.base",
     "Archive/Files/Untitled.base",
@@ -298,17 +305,8 @@
     "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM.jpeg",
     "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM 1.jpeg",
     "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM.jpeg",
-    "Archive/Files/SJ 1266 SUMUR 11 OKTOBER 2025.pdf",
-    "Archive/Files",
-    "Work/🍜 PAS/Files/Nama Analis.xls",
-    "Work/🍜 PAS/Files/Reservasi_SFG_2B_1.xls",
-    "Work/🍜 PAS/Files/Reservasi_SFG_2B_0.xls",
-    "Work/🍜 PAS/Files/Reservasi_SFG_2B 1.xls",
-    "Work/🍜 PAS/Files/Reservasi_SFG_2B.xls",
     "Work/🍜 PAS/IMG/Screenshot from 2026-01-05 14-56-39.png",
     "Work/🍜 PAS/IMG/Screenshot from 2025-12-30 14-32-49.png",
-    "Work/🍜 PAS/Verifikasi Hygiene.md",
-    "Work/🍜 PAS/Table department of PAS.md",
     "Untitled.canvas",
     "_Quick Notes/temp.canvas"
   ]
