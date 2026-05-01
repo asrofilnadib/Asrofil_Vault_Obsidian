@@ -34,19 +34,9 @@
               "icon": "lucide-file",
               "title": "Ubuntu Command"
             }
-          },
-          {
-            "id": "1f52eb808382b25d",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -258,8 +248,10 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "1f52eb808382b25d",
+  "active": "fc85c7ccc42e3a9b",
   "lastOpenFiles": [
+    "Coding/Problem Solve/UBUNTU/Ubuntu 24.04 Touchegg Gesture Swipe.md",
+    "Work/Side Project/Ubuntu 24.04 Touchegg Gesture Swipe.md",
     "01 Mei 2026.md",
     "Personal/Ayah Rumah Tangga.md",
     "Personal/Trigger from behind the curtain.md",
@@ -285,8 +277,6 @@
     "Work/🍜 PAS/Barrier Gate/Barrier Gate 10 April 2026.md",
     "Work/🍜 PAS/Barrier Gate/Barrier Gate 09 April 2026.md",
     "Work/🍜 PAS/Barrier Gate",
-    "Barrier Gate 28 April 2026.md",
-    "Barrier Gate 27 April 2026.md",
     "Untitled.base",
     "Untitled 2.base",
     "Untitled 1.base",
