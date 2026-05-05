@@ -83,6 +83,7 @@ Berdasarkan gambar yang Anda berikan, berikut daftar ekstensi yang sudah Anda gu
 | **GSConnect** | Integrasi dengan Android (mirip KDE Connect). |
 | **User Themes** | Memungkinkan penggunaan tema dari file `.zip` atau `gnome-look.org`. |
 | **Vitals** | Menampilkan informasi sistem real-time: CPU, RAM, disk, suhu, dll. |
+| **X11 Gestures** | Memungkinkan pengguna dapat melakukan navigasi menggunakan trackpad  |
 
 ### 🆕 Additional Highly Recommended Extensions
 

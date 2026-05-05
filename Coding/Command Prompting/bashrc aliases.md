@@ -1,249 +1,390 @@
-# Bash Aliases & Configuration Guide
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
-## Table of Contents
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-- [[#Laravel Artisan Aliases|Laravel Artisan Aliases]]
-- [[#Composer Aliases|Composer Aliases]]
-- [[#Git Aliases|Git Aliases]]
-- [[#Directory Navigation|Display Navigation]]
-- [[#Project Path Shortcuts|Projects Path Shortcuts]]
-- [[#NPM & Testing|NPM & Testing]]
-- [[#Tmux Session Management|Tmux Session Management]]
-- [[#General Commands|General Commands]]
-- [[#Configuration Tips|Configuration Tips]]
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
 
----
+# append to the history file, don't overwrite it
+shopt -s histappend
 
-## Laravel Artisan Aliases
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
 
-### Basic Commands
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
-|Alias|Command|Description|
-|---|---|---|
-|`pa`|`php artisan`|Base artisan command|
-|`pl`|`php artisan list`|List all commands|
-|`ph`|`php artisan help`|Display help|
-|`pi`|`php artisan inspire`|Display inspiring quote|
-|`pb`|`php artisan about`|Application overview|
-|`pt`|`php artisan tinker`|Interactive shell|
-|`pat`|`php artisan tinker`|Alternative tinker|
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
 
-### Application Management
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-|Alias|Command|Description|
-|---|---|---|
-|`pd`|`php artisan down`|Enable maintenance mode|
-|`pu`|`php artisan up`|Disable maintenance mode|
-|`pe`|`php artisan env`|Show environment|
-|`pc`|`php artisan clear-compiled`|Clear compiled files|
-|`po`|`php artisan optimize`|Optimize application|
-|`ps`|`php artisan serve`|Start dev server|
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
 
-### Cache Management
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
 
-|Alias|Command|Description|
-|---|---|---|
-|`pcc`|`php artisan cache:clear`|Clear application cache|
-|`pct`|`php artisan cache:table`|Create cache table migration|
-|`pcoc`|`php artisan config:cache`|Cache configuration|
-|`pcocl`|`php artisan config:clear`|Clear config cache|
-|`vcl`|`php artisan view:clear`|Clear compiled views|
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
 
-### Database & Migrations
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
 
-|Alias|Command|Description|
-|---|---|---|
-|`pm`|`php artisan migrate`|Run migrations|
-|`gin`|`php artisan migrate:install`|Create migration table|
-|`grf`|`php artisan migrate:refresh`|Rollback & re-migrate|
-|`grs`|`php artisan migrate:reset`|Rollback all migrations|
-|`grl`|`php artisan migrate:rollback`|Rollback last migration|
-|`gst`|`php artisan migrate:status`|Show migration status|
-|`gfr`|`php artisan migrate:fresh`|Drop all & re-migrate|
-|`gfrs`|`php artisan migrate:fresh --seed`|Fresh migrate with seed|
-|`pdbs`|`php artisan db:seed`|Seed database|
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u:\w\$ '
+fi
+unset color_prompt force_color_prompt
 
-### Code Generation - Make Commands
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
-|Alias|Command|Description|
-|---|---|---|
-|`kcm`|`php artisan make:command`|Create command|
-|`kcn`|`php artisan make:console`|Create console command|
-|`kcl`|`php artisan make:controller`|Create controller|
-|`kmo`|`php artisan make:model`|Create model|
-|`kmi`|`php artisan make:migration`|Create migration|
-|`kmp`|`php artisan make:migration:pivot`|Create pivot migration|
-|`kms`|`php artisan make:migration:schema`|Create migration with schema|
-|`kfc`|`php artisan make:factory`|Create factory|
-|`ksdr`|`php artisan make:seeder`|Create seeder|
-|`ksd`|`php artisan make:seed`|Create seed|
-|`kre`|`php artisan make:request`|Create request|
-|`kmd`|`php artisan make:middleware`|Create middleware|
-|`kpr`|`php artisan make:provider`|Create service provider|
-|`ke`|`php artisan make:event`|Create event|
-|`kl`|`php artisan make:listener`|Create listener|
-|`kj`|`php artisan make:job`|Create job|
-|`kmm`|`php artisan make:mail`|Create mail class|
-|`krs`|`php artisan make:resource`|Create resource|
-|`kcp`|`php artisan make:component`|Create component|
-|`kmqt`|`php artisan make:queue-table`|Create queue table|
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
 
-### Queue Management
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
 
-|Alias|Command|Description|
-|---|---|---|
-|`qwo`|`php artisan queue:work`|Process queue jobs|
-|`qli`|`php artisan queue:listen`|Listen to queue|
-|`qrs`|`php artisan queue:restart`|Restart queue workers|
-|`qfa`|`php artisan queue:failed`|List failed jobs|
-|`qrt`|`php artisan queue:retry`|Retry failed job|
-|`qfo`|`php artisan queue:forget`|Forget failed job|
-|`qfl`|`php artisan queue:flush`|Flush failed jobs|
-|`qfat`|`php artisan queue:failed-table`|Create failed jobs table|
-|`qta`|`php artisan queue:table`|Create queue table|
-|`qsu`|`php artisan queue:subscribe`|Subscribe to Iron.io push queue|
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-### Route Management
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
-|Alias|Command|Description|
-|---|---|---|
-|`rli`|`php artisan route:list`|List all routes|
-|`rca`|`php artisan route:cache`|Cache routes|
-|`rcl`|`php artisan route:clear`|Clear route cache|
+#alias ccat='pygmentize -O style=monokai -f terminal -g'
+#source ~/git-prompt.sh
+#export PS1='\[\033[01;32m\]\u\[\033[01;34m\] \w\[\033[31m\]$(__git_ps1 " (%s)")\[\033[01;34m\]$\[\033[00m\] '
+#alias cmd='/C/Windows/System32/cmd.exe'
+#HISTSIZE=5000
+#HISTFILESIZE=5000
+#export HISTCONTROL=erasedups
+#export HISTSIZE=10000
+#shopt -s histappend
+#source ~/.git-completion.bash
+#source ~/.bash_prompt
+#source ~/.bash_profile
+#source ~/.screenrc
+#source ~/.bash_history
+#force_color_prompt=yes
+# dir > unzipped.txt  save as text
+#Get-Content C:\Scripts\Test.txt
+alias ll='ls -l'
+#bower
+alias bwu='bower update'
+alias bws='bower search'
+alias bwi='bower install'
+#alias -s='--save'
+#gulp
+alias gg='gulp'
+#export HISTSIZE=999
+#export HISTFILESIZE=999
+#COLUMNS=999
+#lines=999
+#HISTSIZE=1000
+#HISTFILESIZE=2000
+#export HISTCONTROL=ignoreboth  # Ignore dups and commands that start with a space - they won't get added to history
+#export HISTFILESIZE=50000 # Keep up to 5000 lines in history (default is 500)
+#export HISTSIZE=50000     # Keep up to 5000 commands in shell history (default is 500)
+#shopt -s histappend      # append to the history file, don't overwrite it
+#shopt -s cmdhist         # In history file, combine multi-line comamnds into one line
+#stty stop ""             # Disable the default meaning of C-s so it can be used for incremental search forward
+#bind space:magic-space   # Space dynamically expands any ! history expansions
+# set -o vi              # Uncomment this to get vi-style key bindings
 
-### Authentication & Session
+#make new project
+#alias lrn='laravel new'
 
-|Alias|Command|Description|
-|---|---|---|
-|`pau`|`php artisan auth:clear-resets`|Clear password resets|
-|`sta`|`php artisan session:table`|Create session table|
+#alias
+alias al='alias'
+#php artisan
+alias pa='php artisan'
+alias pih='php artisan ide-helper:generate'
+alias pimt='php artisan ide-helper:meta'
+alias pim='php artisan ide-helper:models'
+# laravel new-app
+# alias laravel="git clone -o laravel -b develop https://github.com/laravel/laravel.git"
+alias pun="phpunit"
 
-### Other Commands
+#Available commands:
+alias pc='php artisan clear-compiled'
+#Remove the compiled class file
+alias pd='php artisan down'
+#Put the application into maintenance mode
+alias pe='php artisan env'
+#Display the current framework environment
+alias ph='php artisan help'
+#Displays help for a command
+alias pi='php artisan inspire'
+#Display an inspiring quote
+alias pl='php artisan list'
+#Lists commands
+alias pm='php artisan migrate'
+#Run the database migrations
+alias po='php artisan optimize'
+#Optimize the framework for better performance
+alias ps='php artisan serve'
+#Serve the application on the PHP development server
+alias pt='php artisan tinker'
+#Interact with your application
+alias pu='php artisan up'
+#Bring the application out of maintenance mode
+alias pb='php artisan about'
+#Display an overview of configuration application
 
-|Alias|Command|Description|
-|---|---|---|
-|`pan`|`php artisan app:name`|Set app namespace|
-|`pkgg`|`php artisan key:generate`|Generate app key|
-|`peg`|`php artisan event:generate`|Generate events/listeners|
-|`vpu`|`php artisan vendor:publish`|Publish vendor assets|
-|`sru`|`php artisan schedule:run`|Run scheduled commands|
-|`pdebc`|`php artisan debugbar:clear`|Clear debugbar storage|
+#app
+alias pan='php artisan app:name'
+#Set the application namespace
 
-### IDE Helper (Development)
+#auth
+alias pau='php artisan auth:clear-resets'
+#Flush expired password reset tokens
 
-|Alias|Command|Description|
-|---|---|---|
-|`pih`|`php artisan ide-helper:generate`|Generate helper|
-|`pimt`|`php artisan ide-helper:meta`|Generate meta|
-|`pim`|`php artisan ide-helper:models`|Generate model hints|
+#cache
+alias pcc='php artisan cache:clear'
+#Flush the application cache
+alias pct='php artisan cache:table'
+#Create a migration for the cache database table
 
-### Testing
+#config
+alias pcoc='php artisan config:cache'
+#Create a cache file for faster configuration loading
+alias pcocl='php artisan config:clear'
+#Remove the configuration cache file
 
-|Alias|Command|Description|
-|---|---|---|
-|`pun`|`phpunit`|Run PHPUnit tests|
-|`cpt`|`php artisan pest:test`|Run Pest tests|
+#db
+alias pdbs='php artisan db:seed'
+#Seed the database with records
 
-### Project Creation
+#debugbar
+alias pdebc='php artisan debugbar:clear'
+#Clear the Debugbar Storage
 
-|Alias|Command|Description|
-|---|---|---|
-|`lrn`|`laravel new`|Create new Laravel project|
-|`ln`|`laravel new`|Alternative (Windows)|
+#event
+alias peg='php artisan event:generate'
+#Generate the missing events and listeners based on registration
 
----
+#handler
+alias phc='php artisan handler:command'
+#Create a new command handler class
+alias phe='php artisan handler:event'
+#Create a new event handler class
 
-## Composer Aliases
+#key
+alias pkgg='php artisan key:generate'
+#Set the application key
 
-|Alias|Command|Description|
-|---|---|---|
-|`.c`|`composer`|Base composer command|
-|`.ch`|`composer help`|Show help|
-|`.ci`|`composer install`|Install dependencies|
-|`.cu`|`composer update`|Update dependencies|
-|`.cr`|`composer require`|Require package|
-|`.csh`|`composer show`|Show packages|
-|`.cse`|`composer search`|Search packages|
-|`.cpd`|`composer create-project --prefer-dist`|Create project|
-|`.csu`|`sudo composer self-update`|Update composer|
-|`.cdu`|`composer dump-autoload`|Regenerate autoload|
-|`.cduo`|`composer dump-autoload -o`|Optimized autoload|
+# make
+alias kcm='php artisan make:command'
+#Create a new command class
+alias kfc='php artisan make:factory'
+#Create a new Factory class
+alias kcn='php artisan make:console'
+#Create a new Artisan command
+alias kcl='php artisan make:controller'
+#Create a new resource controller class
+alias ke='php artisan make:event'
+#Create a new event class
+alias kj='php artisan make:job'
+#Create a new job class
+alias kl='php artisan make:listener'
+#Create a new event listener class
+alias kmd='php artisan make:middleware'
+#Create a new middleware class
+alias kmi='php artisan make:migration'
+#Create a new migration file
+alias kmp='php artisan make:migration:pivot'
+#Create a new migration pivot class
+alias kms='php artisan make:migration:schema'
+#Create a new migration class, and apply schema at the same time
+alias kmo='php artisan make:model'
+#Create a new Eloquent model class
+alias kmm='php artisan make:mail'
+#Create a new Mail model class
+alias kmqt='php artisan make:queue-table'
+#Create a new queue table class
+alias kpr='php artisan make:provider'
+#Create a new service provider class
+alias kre='php artisan make:request'
+#Create a new form request class
+alias ksd='php artisan make:seed'
+#Create a new database seed class
+alias ksdr='php artisan make:seeder'
+#Create a new seeder class
+alias krs='php artisan make:resource'
+#Create a new resource class
+alias kcp='php artisan make:component'
+#Create a new component for blade
 
-**Examples:**
+#migrate
+alias gin='php artisan migrate:install'
+#Create the migration repository
+alias grf='php artisan migrate:refresh'
+#Rollbacks each of your migration batches then rerun all the migrations
+alias grs='php artisan migrate:reset'
+#Rollback all database migrations
+alias grl='php artisan migrate:rollback'
+#Rollback the last database migration
+alias gst='php artisan migrate:status'
+#Show the status of each migration
+alias gfr='php artisan migrate:fresh'
+#Reset and re-run all migrations
+alias gfrs='php artisan migrate:fresh --seed'
+#Reset and re-run all migrations and give seed to database
 
-```bash
-.ci                           # Install dependencies
-.cr laravel/sanctum          # Install Sanctum
-.cu                           # Update all packages
-.cdu                          # Regenerate autoload
-```
+#queue
+alias qfa='php artisan queue:failed'
+#List all of the failed queue jobs
+alias qfat='php artisan queue:failed-table'
+#Create a migration for the failed queue jobs database table
+alias qfl='php artisan queue:flush'
+#Flush all of the failed queue jobs
+alias qfo='php artisan queue:forget'
+#Delete a failed queue job
+alias qli='php artisan queue:listen'
+#Listen to a given queue'
+alias qrs='php artisan queue:restart'
+#Restart queue worker daemons after their current job
+alias qrt='php artisan queue:retry'
+#Retry a failed queue job
+alias qsu='php artisan queue:subscribe'
+#Subscribe a URL to an Iron.io push queue
+alias qta='php artisan queue:table'
+#Create a migration for the queue jobs database table
+alias qwo='php artisan queue:work'
+#Process the next job on a queue
 
----
+#route
+alias rca='php artisan route:cache'
+#Create a route cache file for faster route registration
+alias rcl='php artisan route:clear'
+#Remove the route cache file
+alias rli='php artisan route:list'
+#List all registered routes
 
-## Git Aliases
+#schedule
+alias sru='php artisan schedule:run'
+#Run the scheduled commands
 
-|Alias|Command|Description|
-|---|---|---|
-|`ga`|`git add`|Stage file|
-|`gaa`|`git add .`|Stage all files|
-|`gc`|`git commit -m`|Commit with message|
-|`gp`|`git push`|Push to remote|
-|`gs`|`git status`|Show status|
-|`gl`|`git log`|Show log|
+#session
+alias sta='php artisan session:table'
+#Create a migration for the session database table
 
-**Examples:**
+#vendor
+alias vpu='php artisan vendor:publish'
+#Publish any publishable assets from vendor packages
 
-```bash
-ga file.php               # Stage specific file
-gaa                       # Stage all changes
-gc "feat: add feature"    # Commit with message
-gp origin main            # Push to main branch
-gs                        # Check status
-gl                        # View commit history
-```
+#view
+alias vcl='php artisan view:clear'
+#Clear all compiled view files
 
-**See full Git commands in:** [Git Commands Reference](https://claude.ai/chat/1508e4ec-6e1d-4a7e-a227-6714cbd47417#)
+####composer
+alias .c="composer"
+alias .ch="composer help"
+alias .cpd="composer create-project --prefer-dist"
+alias .csu="sudo composer self-update"
+alias .cu="composer update"
+alias .ci="composer install"
+alias .cr="composer require"
+alias .csh="composer show"
+alias .cse="composer search"
+alias .cdu="composer dump-autoload"
+alias .cduo="composer dump-autoload -o"
 
----
+#tinker
+alias pat="php artisan tinker"
 
-## Directory Navigation
+#mysql
+alias .m="mysql -u root -p"
+alias .ms="show databases;"
+alias .msb="subscribe"
+alias .ms="selec * from"
 
-### Basic Navigation
+# Git
+alias ga="git add"
+alias gaa="git add ."
+alias gc="git commit -m"
+alias gp="git push"
+alias gs="git status"
+alias gl="git log"
+alias gpl="git pull"
+#alias gs='git status '
+#alias ga='git add '
+#alias gb='git branch '
+#alias gc='git commit'
+#alias gd='git diff'
+#alias go='git checkout '
+#alias gk='gitk --all&'
+#alias gx='gitx --all'
+#alias got='git '
+#alias get='git '
+alias grv="git remote -v"
+alias gbr="git branch -r"
 
-|Alias|Command|Description|
-|---|---|---|
-|`..`|`cd ../`|Up one directory|
-|`...`|`cd ../../`|Up two directories|
-|`....`|`cd ../../../`|Up three directories|
-|`.....`|`cd ../../../../`|Up four directories|
-|`~`|`cd ~`|Go to home directory|
+# Directory
+alias ..="cd ../"
+alias ...="cd ../../"
+alias ....="cd ../../../"
+alias .....="cd ../../../../"
 
-**Examples:**
+# Dump SQL
+alias dump="cd ~/dumpsql"
 
-```bash
-..        # Go to parent directory
-...       # Go up 2 levels
-~         # Go to home
-```
+# NPM Command
+alias rdev="npm run dev"
 
----
+# Pest
+alias cpt="php artisan pest:test"
 
-## Project Path Shortcuts
-
-### Ubuntu/Linux Paths
-
-#### Main Project Directory
-
-```bash
+# Proyek path
 alias proj="cd /mnt/windows-d/Proyek"
-```
 
-#### Laravel Projects
-
-```bash
-alias laravel="cd /mnt/windows-d/Proyek/Laravel"
+# ------------------------------------------------------------
+#-- Path Laravel
+#alias laravel="cd /mnt/windows-d/Proyek/Laravel"
 alias pnm="cd /mnt/windows-d/Proyek/Laravel/graceperiode"
 alias portaljob="cd /mnt/windows-d/Proyek/Laravel/portaljob"
+alias ~="cd ~"
 alias jeki="cd /mnt/windows-d/Proyek/Laravel/jeki"
 alias kastara="cd /mnt/windows-d/Proyek/Laravel/kastara"
 alias praditasari="cd /mnt/windows-d/Proyek/Laravel/praditasari"
@@ -253,427 +394,170 @@ alias ebhan="cd /mnt/windows-d/Proyek/Laravel/opname"
 alias wpas="cd /mnt/windows-d/Proyek/Laravel/warehouse-pas"
 alias pasd="cd /mnt/windows-d/Proyek/Laravel/newpas-master"
 alias pas="cd /home/asrofil/Project/newpas-master"
-```
 
-#### CodeIgniter Projects
-
-```bash
+#-- CodeIgniter
 alias ci="cd /mnt/windows-d/Proyek/CodeIgniter"
 alias labqc="cd /mnt/windows-d/Proyek/CodeIgniter/lab-qc"
 alias cplt="cd /mnt/windows-d/Proyek/CodeIgniter/checksheet-plate"
 alias logpc="cd /mnt/windows-d/Proyek/CodeIgniter/log-problem-customer"
 alias logpi="cd /mnt/windows-d/Proyek/CodeIgniter/log-problem-internal"
-alias investigation="cd /mnt/windows-d/Proyek/CodeIgniter/investigation-report"
+alias investigation='cd /mnt/windows-d/Proyek/CodeIgniter/investigation-report'
 alias testing="cd /mnt/windows-d/Proyek/CodeIgniter/testing-report"
 alias bast="cd /mnt/windows-d/Proyek/CodeIgniter/bast"
 alias pcv2="cd /mnt/windows-d/Proyek/CodeIgniter/production_control_v2"
 alias wet="cd /mnt/windows-d/Proyek/CodeIgniter/wet-charging"
-```
 
-#### Other Projects
+#-- GO
+# alias go="cd /mnt/windows-d/Proyek/GO"
 
-```bash
-alias go="cd /mnt/windows-d/Proyek/GO"
+#-- Jupyter Lab
 alias jupe="cd '/mnt/windows-d/Proyek/Jupyter Lab'"
+# ------------------------------------------------------------
+
+# ------------------------------------------------------------
+# CodeIgniter
+alias cn='composer create-project codeigniter4/appstarter'
 alias testproject="cd ~/PhpstormProjects/test-project"
-```
+alias pss="php spark serve"
 
-### Windows Paths
+# ------------------------------------------------------------
+alias catastrophy="bash ~/.tmux-catastrophy.sh"
+alias armagedon="bash ~/.tmux-armagedon.sh"
 
-#### Main Project Directory
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-```bash
-alias proj="cd D:/Proyek"
-```
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-#### Laravel Projects
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-```bash
-alias laravel="cd D:/Proyek/Laravel"
-alias pnm="cd D:/Proyek/Laravel/graceperiode"
-alias portaljob="cd D:/Proyek/Laravel/portaljob"
-alias jeki="cd D:/Proyek/Laravel/jeki"
-alias kastara="cd D:/Proyek/Laravel/kastara"
-alias praditasari="cd D:/Proyek/Laravel/praditasari"
-alias filament="cd D:/Proyek/Laravel/_packages/filament"
-alias skripsi="cd D:/Proyek/Laravel/capaian_karya"
-alias ebhan="cd D:/Proyek/Laravel/opname"
-```
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
 
-#### CodeIgniter Projects
+# Auto-start tmux with custom layout
+# if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+#     ~/.tmux-layouts.sh
+#     exit
+# fi
 
-```bash
-alias ci="cd D:/Proyek/CodeIgniter"
-alias labqc="cd D:/Proyek/CodeIgniter/lab-qc"
-alias cplt="cd D:/Proyek/CodeIgniter/checksheet-plate"
-alias logp="cd D:/Proyek/CodeIgniter/log-problem"
-alias logpi="cd D:/Proyek/CodeIgniter/log-problem-internal"
-```
-
-#### Other Projects
-
-```bash
-alias jupe="cd 'D:/Proyek/Jupyter Lab'"
-alias testproject="cd ~/PhpstormProjects/test-project"
-```
-
-**Usage:**
-
-```bash
-# Navigate to projects quickly
-laravel      # Go to Laravel directory
-pnm          # Go to graceperiode project
-ci           # Go to CodeIgniter directory
-labqc        # Go to lab-qc project
-```
-
----
-
-## NPM & Testing
-
-### NPM Commands
-
-```bash
-alias rdev="npm run dev"     # Run development server
-```
-
-### CodeIgniter
-
-```bash
-alias cn="composer create-project codeigniter4/appstarter"  # Create new CI4 project
-alias pss="php spark serve"                                  # Start CI4 server
-```
-
-### Legacy Tools (Optional)
-
-```bash
-# Bower (deprecated, but kept for legacy projects)
-alias bwu="bower update"
-alias bws="bower search"
-alias bwi="bower install"
-
-# Gulp
-alias gg="gulp"
-```
-
----
-
-## Tmux Session Management
-
-### Session Aliases
-
-```bash
-# Aquarium session - auto-create and run asciiquarium
-alias aqua='tmux new-session -s aquarium -d && \
-  tmux send-keys -t aquarium "asciiquarium" C-m && \
-  tmux attach -t aquarium'
-```
-
-**Usage:**
-
-```bash
-aqua        # Create aquarium session with asciiquarium
-```
-
-**Manual Tmux Commands:**
-
-```bash
-# Create new session
-tmux new-session -s <session_name>
-
-# List sessions
-tmux ls
-
-# Attach to session
-tmux attach -t <session_name>
-
-# Kill session
-tmux kill-session -t <session_name>
-
-# Switch between sessions (inside tmux)
-Ctrl+a then s
-```
-
-**See full Tmux guide in:** [Ubuntu Development Notes - Tmux Section](https://claude.ai/chat/1508e4ec-6e1d-4a7e-a227-6714cbd47417#)
-
----
-
-## General Commands
-
-### MySQL
-
-```bash
-alias .m="mysql -u root -p"
-alias .ms="show databases;"
-alias .msb="subscribe"
-```
-
-### List Aliases
-
-```bash
-alias al="alias"          # Show all aliases
-alias ll="ls -l"         # List detailed
-alias la="ls -A"         # List all
-```
-
----
-
-## Configuration Tips
-
-### Where to Add Aliases
-
-#### Linux (Ubuntu/Debian)
-
-```bash
-nano ~/.bashrc
-# Add your aliases at the end
-# Then reload:
-source ~/.bashrc
-```
-
-#### Windows Git Bash
-
-```bash
-nano ~/.bashrc
-# Add your aliases
-# Restart Git Bash
-```
-
-### Reload Configuration
-
-```bash
-source ~/.bashrc          # Reload bashrc
-exec bash                 # Restart bash
-```
-
-### View Current Aliases
-
-```bash
-alias                     # Show all aliases
-alias pa                  # Show specific alias
-type pa                   # Show alias definition
-```
-
-### Disable/Remove Alias
-
-```bash
-unalias pa               # Temporarily disable
-# To permanently remove: delete from ~/.bashrc
-```
-
----
-
-## Advanced Configurations
-
-### Auto-start Tmux on Terminal Open
-
-**Ubuntu (~/.bashrc):**
-
-```bash
+# Auto start tmux when open a terminal
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -z "$SSH_TTY" ]; then
     if tmux has-session -t main 2>/dev/null; then
         tmux attach-session -t main
     else
         SESSION="main"
-        tmux new-session -d -s $SESSION
-        tmux split-window -h -p 70 -c "$HOME"
-        tmux split-window -v -p 35 -t 1 -c "$HOME"
-        tmux split-window -h -p 50 -t 1 -c "$HOME"
-        tmux send-keys -t 0 'btop' C-m
-        tmux send-keys -t 1 'cd ~' C-m
-        tmux send-keys -t 2 'neofetch' C-m
-        tmux send-keys -t 3 'cd ~' C-m
-        tmux select-pane -t 1
+        tmux new-session -d -s $SESSION -n "main" 'clear'
+
+        # Split kiri-kanan: kiri 30% (≈80 char), kanan 70%
+        tmux select-pane -t $SESSION:0
+        tmux split-window -h -p 30 -t $SESSION
+
+        # Jalankan btop di pane kiri
+        tmux send-keys -t $SESSION:0.0 'btop' C-m
+
+        # Pindah ke pane kanan
+        tmux select-pane -t $SESSION:0.1
+
+        # Split atas-bawah: atas 41%, bawah 59% (≈26 baris)
+        tmux split-window -v -p 59 -t $SESSION:0.1
+
+        # Jalankan neofetch di pane kanan bawah
+        tmux send-keys -t $SESSION:0.2 'neofetch' C-m
+
+        # Pindah ke pane kanan atas
+        tmux select-pane -t $SESSION:0.1
+
+        # Split pane kanan atas jadi kiri-kanan 50-50
+        tmux split-window -h -p 50 -t $SESSION:0.1
+
+        # Clear di kedua pane atas
+        tmux send-keys -t $SESSION:0.1 'clear' C-m
+        tmux send-keys -t $SESSION:0.3 'clear' C-m
+
+        # Resize pane untuk presisi (opsional)
+        tmux resize-pane -t $SESSION:0.0 -x 80   # Lebar 80
+        tmux resize-pane -t $SESSION:0.2 -y 26   # Tinggi 26
+        tmux resize-pane -t $SESSION:0.1 -y 18   # Tinggi 18
+
+        # Fokus ke pane kerja (kiri atas)
+        tmux select-pane -t $SESSION:0.1
+
+        # Attach
         tmux attach-session -t $SESSION
     fi
 fi
-```
 
-### Export PATH Variables
+# Tmux session aquarium
+alias aqua='tmux new-session -s aquarium -d && tmux send-keys -t aquarium "asciiquarium" C-m && tmux attach -t aquarium'
 
-**Ubuntu example:**
-
-```bash
 export PATH=$PATH:/home/asrofil/.spicetify
 export PATH=$PATH:$HOME/spicetify
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$HOME/.local/bin
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
-# NVM (Node Version Manager)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-```
+# Composer global bin (WAJIB buat laravel)
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
-### History Configuration
+# ========================================
+# Docker Aliases - Format Rapih
+# ========================================
 
-```bash
-HISTCONTROL=ignoreboth    # Ignore duplicates & space-prefixed
-HISTSIZE=1000            # Commands in memory
-HISTFILESIZE=2000        # Commands in file
-shopt -s histappend      # Append to history, don't overwrite
-```
+# Docker ps dengan format table rapih
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 
----
+# Docker ps -a dengan format table rapih
+alias dpsa='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
 
-## Platform Differences
+# Docker ps hanya nama dan status
+alias dstat='docker ps --format "table {{.Names}}\t{{.Status}}"'
 
-### Path Format
+# Docker ps dengan ID pendek (12 karakter)
+alias dpsid='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}" | head -c 12'
 
-**Linux/Ubuntu:**
+# Docker ps sorted by name
+alias dps-sorted='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" | (sed -u 1q; sort -k1)'
 
-```bash
-/mnt/windows-d/Proyek/Laravel
-/home/asrofil/Project
-```
+# Docker ps hanya running
+alias dps-running='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
 
-**Windows:**
+# Docker ps dengan created time
+alias dps-created='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.CreatedAt}}"'
 
-```bash
-D:/Proyek/Laravel
-C:/Users/asrofil/Project
-```
+# Docker images
+alias dmgs='docker images'
 
-### Command Differences
+# py env
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 
-|Task|Ubuntu|Windows Git Bash|
-|---|---|---|
-|Edit bashrc|`nano ~/.bashrc`|`nano ~/.bashrc`|
-|Reload|`source ~/.bashrc`|Restart terminal|
-|Home directory|`/home/username`|`/c/Users/username`|
-|Drive access|`/mnt/c/` `/mnt/d/`|`/c/` `/d/`|
+# GO env path
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
 
----
+alias scrcpy='/home/asrofil/scrcpy-linux-x86_64-v3.3.4/scrcpy --no-clipboard-autosync'
 
-## Quick Reference Card
-
-### Most Used Aliases
-
-```bash
-# Laravel
-pa          # php artisan
-pm          # migrate
-gfr         # fresh migrate
-pcc         # clear cache
-ps          # serve
-
-# Composer
-.ci         # install
-.cu         # update
-.cdu        # dump-autoload
-
-# Git
-gaa         # add all
-gc "msg"    # commit
-gp          # push
-
-# Navigation
-..          # up one level
-laravel     # to Laravel dir
-proj        # to project dir
-
-# Tmux
-aqua        # aquarium session
-```
-
-### Create Custom Alias
-
-```bash
-# Temporary (current session only)
-alias myalias='command here'
-
-# Permanent
-echo "alias myalias='command here'" >> ~/.bashrc
-source ~/.bashrc
-```
-
-### Example Custom Aliases
-
-```bash
-# Quick project setup
-alias setup='composer install && npm install && php artisan key:generate'
-
-# Clear all caches
-alias clearall='php artisan optimize:clear && composer dump-autoload'
-
-# Git shortcuts
-alias gitundo='git reset --soft HEAD~1'
-alias gitlog='git log --oneline --graph --all'
-
-# Docker
-alias dcu='docker compose up -d'
-alias dcd='docker compose down'
-alias dcl='docker compose logs -f'
-```
-
----
-
-## Best Practices
-
-✅ **Do:**
-
-- Group related aliases together
-- Add comments for complex aliases
-- Use descriptive names
-- Keep aliases short but memorable
-- Backup your .bashrc before major changes
-- Document custom aliases
-
-❌ **Don't:**
-
-- Override system commands without good reason
-- Use conflicting alias names
-- Make aliases too complex (use functions instead)
-- Forget to reload after changes
-
----
-
-## Troubleshooting
-
-### Alias Not Working
-
-```bash
-# Check if alias exists
-type alias_name
-
-# Check for typos in .bashrc
-nano ~/.bashrc
-
-# Reload configuration
-source ~/.bashrc
-
-# Check for conflicts
-alias | grep alias_name
-```
-
-### Command Not Found
-
-```bash
-# Ensure path is in .bashrc
-echo $PATH
-
-# Check if command exists
-which command_name
-
-# For PHP/Composer issues
-php -v
-composer -v
-```
-
-### Path Issues (Windows in Linux)
-
-```bash
-# List mounted drives
-ls /mnt/
-
-# Check if drive is mounted
-mount | grep windows
-```
-
----
-
-## Additional Resources
-
-- [Laravel Debugging Guide]() - Full Laravel troubleshooting
-- [Docker Commands Reference](https://claude.ai/chat/1508e4ec-6e1d-4a7e-a227-6714cbd47417#) - Complete Docker guide
-- [Git Commands Reference](https://claude.ai/chat/1508e4ec-6e1d-4a7e-a227-6714cbd47417#) - Comprehensive Git guide
-- [Ubuntu Development Notes](https://claude.ai/chat/1508e4ec-6e1d-4a7e-a227-6714cbd47417#) - System administration tips
+alias mendeley='/home/asrofil/mendeley/mendeley-reference-manager-2.144.0-x86_64.AppImage --no-sandbox'
