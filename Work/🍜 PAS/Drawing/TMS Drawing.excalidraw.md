@@ -26,7 +26,7 @@ L3M7WvZb: https://docs.google.com/spreadsheets/d/1VPgpCPYRcwIUU07_LjpJTQ8ALgnYGv
 kTbBy5Cy: https://docs.google.com/spreadsheets/d/1RDtF_AsQvvgVJbQCqNrc5Maisg6dA3b_/edit?usp=drive_link&ouid=101509029906344307779&rtpof=true&sd=true
 
 ## Embedded Files
-c9a73d80ff07e9ba01ac0aa3ce706d1d577cc808: [[Screenshot from 2026-01-05 14-56-39.png]]
+c9a73d80ff07e9ba01ac0aa3ce706d1d577cc808: [[IMG/Screenshot from 2026-01-05 14-56-39.png]]
 
 %%
 ## Drawing

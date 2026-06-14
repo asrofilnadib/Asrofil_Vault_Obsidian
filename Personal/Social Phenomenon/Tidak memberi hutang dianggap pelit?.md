@@ -4,7 +4,7 @@ _Kenapa Banyak Orang Gak Tau Diri Hutang Gak Dibantu Malah Bilang Kita Pelit?_
 
 ---
 
-![[NoteGPT_MindMap_1758091802273.png]]
+![[Archive/Files/NoteGPT_MindMap_1758091802273.png]]
 
 pasti lu pernah ngalamin ada yang dateng buat minjem uang lalu lu tolak dengan alesan yang jelas tapi ujung-ujungnya lu malah di cap PELIT. seolah-olah itu sama aja kayak lu nolak kemanusiaan.
 

@@ -1,0 +1,5 @@
+- [x] buat di tiap message catet jam ketika di kirim ke request ✅ 2026-05-18
+- [x] bad and good response untuk tiap message, gunanya agar bisa ke saring response yang baik dan buruk apa ✅ 2026-05-25
+- [x] ambil usage model gemini api key dan tampilin di kapas admin ✅ 2026-05-25
+- [x] buat tampilan di kapas untuk melihat dan monitoring semua conversation yang ada ✅ 2026-05-22
+- [ ] test case user, buat fitur token yang bakal membatasi si user pada ini untuk ngeprompt. Referensi liat dari claude

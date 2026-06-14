@@ -77,4 +77,4 @@ pada modal form investigation:
 ### Form Investigation
 ![[IMG/screencapture-localhost-8080-investigation-2025-07-18-20_06_48.png]]
 ### Export File Investigation
-![[Investigation-Report_21_2025-07-18.pdf]]
+![[Archive/images/Investigation-Report_21_2025-07-18.pdf]]

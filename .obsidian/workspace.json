@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Work/🍜 PAS/Smart Lab.md",
+                "file": "Work/🍜 PAS/Chat Bot PAS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Smart Lab"
+              "title": "Chat Bot PAS"
             }
           },
           {
@@ -27,16 +27,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Coding/Command Prompting/Ubuntu Command.md",
+                "file": "Work/🍜 PAS/Digitalisasi P2H.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Ubuntu Command"
+              "title": "Digitalisasi P2H"
+            }
+          },
+          {
+            "id": "092587f8b00423b3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Work/🍜 PAS/Extension Toolkit.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Extension Toolkit"
+            }
+          },
+          {
+            "id": "aac6d93f6c84b75e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Coding/Command Prompting/Git Command.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Git Command"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -69,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tmux",
+                "query": "github conven",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -111,8 +139,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5026054382324,
-    "collapsed": true
+    "width": 299.5026054382324
   },
   "right": {
     "id": "3f52144e05ccb070",
@@ -175,13 +202,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Barrier Gate 15 April 2026.md",
+                "file": "Coding/Command Prompting/Git Command.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Barrier Gate 15 April 2026"
+              "title": "Outline of Git Command"
             }
           },
           {
@@ -226,8 +253,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 273.5,
-    "collapsed": true
+    "width": 273.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -248,34 +274,39 @@
       "remotely-save:Remotely Save": false
     }
   },
-  "active": "fc85c7ccc42e3a9b",
+  "active": "aac6d93f6c84b75e",
   "lastOpenFiles": [
-    "Coding/Problem Solve/UBUNTU/Ubuntu 24.04 Touchegg Gesture Swipe.md",
-    "Work/Side Project/Ubuntu 24.04 Touchegg Gesture Swipe.md",
-    "01 Mei 2026.md",
-    "Personal/Ayah Rumah Tangga.md",
-    "Personal/Trigger from behind the curtain.md",
-    "Personal/The true meaning of Wealth.md",
-    "Personal/The Ring of Gyges.md",
-    "Personal/Reflection of Life & Death.md",
-    "Personal/Read more about Reflection of Ourselves.md",
-    "Personal/Pentingnya Baca Novel.md",
-    "Personal/instability of decision-making.md",
-    "Personal/Definition of Decision Making.md",
-    "Work/CBI/portal investigation report.md",
-    "Work/🍜 PAS/01 Mei 2026.md",
+    "Untitled.md",
+    "cursor_asking 1.md",
+    "Coding/Command Prompting/Git Command.md",
+    "cursor_asking.md",
+    "Work/🍜 PAS/Extension Toolkit.md",
+    "Work/🍜 PAS/Digitalisasi P2H.md",
+    "Work/🍜 PAS/Chat Bot PAS.md",
+    "Work/🍜 PAS/Downtime.md",
+    "Work/🍜 PAS/Formsheet.md",
+    "Work/🍜 PAS/Smart Lab.md",
+    "Work/🍜 PAS/Perjanjian Kerja Waktu.md",
+    "Work/🍜 PAS/SSL.md",
+    "Work/🍜 PAS/SP Online.md",
+    "Work/🍜 PAS/Premix Online.md",
+    "Work/🍜 PAS/Knowledge Management System.md",
+    "Work/🍜 PAS/Knowledge Application of PAS.md",
+    "Coding/Command Prompting/Ubuntu Command.md",
+    "Pasted image 20260521152440.png",
+    "Work/🍜 PAS/Modbus Scanner.md",
+    "Work/🍜 PAS/Portal LAB.md",
+    "Work/🍜 PAS/NOTE MEETING.md",
     "Work/🍜 PAS/Barrier Gate/Barrier Gate 28 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 27 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 23 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 22 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 21 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 20 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 16 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 15 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 14 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 13 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 10 April 2026.md",
-    "Work/🍜 PAS/Barrier Gate/Barrier Gate 09 April 2026.md",
+    "Work/🍜 PAS/Barrier Gate/12 Mei 2026.md",
+    "Pasted image 20260520030253.png",
+    "Pasted image 20260520030155.png",
+    "Pasted image 20260520030059.png",
+    "Work/🍜 PAS/Barrier Gate/Barrier Gate 15 Mei 2026.md",
+    "Pasted image 20260520030040.png",
+    "Work/🍜 PAS/Truck Management System.md",
+    "Work/🍜 PAS/Verifikasi Hygiene.md",
+    "Work/🍜 PAS/Table department of PAS.md",
     "Work/🍜 PAS/Barrier Gate",
     "Untitled.base",
     "Untitled 2.base",
@@ -292,11 +323,6 @@
     "Archive/Files/NoteGPT_MindMap_1758091802273.png",
     "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM 2.jpeg",
     "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM 1.jpeg",
-    "Archive/Files/WhatsApp Image 2025-10-12 at 11.54.16 PM.jpeg",
-    "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM 1.jpeg",
-    "Archive/Files/WhatsApp Image 2025-10-12 at 11.53.41 PM.jpeg",
-    "Work/🍜 PAS/IMG/Screenshot from 2026-01-05 14-56-39.png",
-    "Work/🍜 PAS/IMG/Screenshot from 2025-12-30 14-32-49.png",
     "Untitled.canvas",
     "_Quick Notes/temp.canvas"
   ]

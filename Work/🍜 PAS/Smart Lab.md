@@ -212,6 +212,7 @@ Identik dengan Noodle 1.
       ![[IMG/Screenshot from 2025-12-30 14-32-49.png]]
 - [x] ➕ 2026-01-12 disable notif when result of PA was rejected 🔽 📅 2026-01-12 ✅ 2026-01-12
 - [x] ➕ 2026-01-11 disable chat on telegram 🔽 📅 2026-01-13 ✅ 2026-01-12
+- [x] gawi edit sample ✅ 2026-05-21
 
 ### Pending
 - [x] ➕ 2025-11-11 halaman /qa/ ketika ingin input nilai parameter dibuat agar request postnya berjalan dibelakang, di view nya kasih field untuk input nilai yang parameternya di klik, begitu enter atau keluar dari field tersebut maka save dari segi backendnya ⏫ ✅ 2025-12-10
