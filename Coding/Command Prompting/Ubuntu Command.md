@@ -1,4 +1,4 @@
-ph## Docker - SQL Server
+## Docker - SQL Server
 
 ### Create SQL Server Container
 ```bash

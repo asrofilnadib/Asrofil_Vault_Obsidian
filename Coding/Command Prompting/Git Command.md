@@ -1,4 +1,4 @@
-	## Commit Message Conventions
+## Commit Message Conventions
 	
 | Prefix     | Usage                        | Description                                        |
 | ---------- | ---------------------------- | -------------------------------------------------- |

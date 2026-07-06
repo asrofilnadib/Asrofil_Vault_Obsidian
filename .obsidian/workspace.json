@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Coding/Command Prompting/Git Command.md",
+                "file": "Coding/Command Prompting/Ubuntu Command.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Git Command"
+              "title": "Ubuntu Command"
             }
           }
         ],
@@ -97,7 +97,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "github conven",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -202,13 +202,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Coding/Command Prompting/Git Command.md",
+                "file": "Coding/Command Prompting/Ubuntu Command.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Git Command"
+              "title": "Outline of Ubuntu Command"
             }
           },
           {
@@ -276,9 +276,11 @@
   },
   "active": "aac6d93f6c84b75e",
   "lastOpenFiles": [
+    "Coding/Problem Solve/UBUNTU/Setup Superfile on Ubuntu 24.04.md",
+    "Coding/Command Prompting/Superfile Hotkeys.md",
+    "Coding/Command Prompting/Git Command.md",
     "Untitled.md",
     "cursor_asking 1.md",
-    "Coding/Command Prompting/Git Command.md",
     "cursor_asking.md",
     "Work/🍜 PAS/Extension Toolkit.md",
     "Work/🍜 PAS/Digitalisasi P2H.md",
@@ -305,8 +307,6 @@
     "Work/🍜 PAS/Barrier Gate/Barrier Gate 15 Mei 2026.md",
     "Pasted image 20260520030040.png",
     "Work/🍜 PAS/Truck Management System.md",
-    "Work/🍜 PAS/Verifikasi Hygiene.md",
-    "Work/🍜 PAS/Table department of PAS.md",
     "Work/🍜 PAS/Barrier Gate",
     "Untitled.base",
     "Untitled 2.base",
