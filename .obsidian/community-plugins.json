@@ -19,5 +19,12 @@
   "obsidian-git",
   "obsidian-outliner",
   "remotely-save",
-  "obsidian-image-toolkit"
+  "obsidian-image-toolkit",
+  "homepage",
+  "obsidian-admonition",
+  "obsidian-banners",
+  "obsidian-react-components",
+  "obsidian-advanced-uri",
+  "periodic-notes",
+  "tasks-calendar-wrapper"
 ]

@@ -1,0 +1,98 @@
+/* Fallback warna Rainbell — Atom theme tidak punya variabel Blue Topaz */
+body {
+  --p-myhome-border-color: #7d7d7d55;
+  --p-myhome-color-1: #a8e6cf;
+  --p-myhome-color-2: #ffd3b6;
+  --p-myhome-color-3: #ffaaa5;
+  --p-myhome-color-4: #dcedc1;
+  --p-myhome-color-5: #b5d8eb;
+  --p-myhome-color-6: #e2c8f0;
+  --p-myhome-color-7: #f8b195;
+  --p-myhome-color-8: #c9d6df;
+  --p-myhome-card-color-1: #f7b2b280;
+}
+
+/* Cssclass myhome — Reading + Live Preview */
+.view-content.myhome .metadata-container,
+.markdown-preview-view.myhome .metadata-container {
+  display: none !important;
+}
+
+.view-content.myhome .list-bullet {
+  display: none !important;
+}
+
+/* Grid navigasi — works di preview & live preview */
+.view-content.myhome ul,
+.markdown-preview-view.myhome ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0.5em 0;
+  gap: 0.3em;
+}
+
+.view-content.myhome ul > li:not(.task-list-item),
+.markdown-preview-view.myhome ul > li:not(.task-list-item) {
+  flex: 1 1 22%;
+  min-width: 140px;
+  list-style: none;
+  border: 1px solid var(--p-myhome-border-color);
+  border-radius: 6px;
+  padding: 0.4em 0.6em;
+  margin: 0 !important;
+}
+
+.view-content.myhome ul > li:nth-of-type(8n+1),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+1) { background-color: var(--p-myhome-color-1); }
+.view-content.myhome ul > li:nth-of-type(8n+2),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+2) { background-color: var(--p-myhome-color-2); }
+.view-content.myhome ul > li:nth-of-type(8n+3),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+3) { background-color: var(--p-myhome-color-3); }
+.view-content.myhome ul > li:nth-of-type(8n+4),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+4) { background-color: var(--p-myhome-color-4); }
+.view-content.myhome ul > li:nth-of-type(8n+5),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+5) { background-color: var(--p-myhome-color-5); }
+.view-content.myhome ul > li:nth-of-type(8n+6),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+6) { background-color: var(--p-myhome-color-6); }
+.view-content.myhome ul > li:nth-of-type(8n+7),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n+7) { background-color: var(--p-myhome-color-7); }
+.view-content.myhome ul > li:nth-of-type(8n),
+.markdown-preview-view.myhome ul > li:nth-of-type(8n) { background-color: var(--p-myhome-color-8); }
+
+.view-content.myhome ul ul,
+.markdown-preview-view.myhome ul ul {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.4em;
+  border: none;
+  background: none;
+  gap: 0.2em;
+}
+
+.view-content.myhome ul ul li:not(.task-list-item),
+.markdown-preview-view.myhome ul ul li:not(.task-list-item) {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background-color: var(--p-myhome-card-color-1) !important;
+  border-radius: 4px;
+  padding: 0.2em;
+}
+
+.view-content.myhome ul ul li:hover,
+.markdown-preview-view.myhome ul ul li:hover {
+  background: var(--interactive-accent) !important;
+}
+
+.view-content.myhome ul ul li:hover a,
+.markdown-preview-view.myhome ul ul li:hover a {
+  color: #fff !important;
+}
+
+/* Sembunyikan blok config dataview di preview */
+.view-content.myhome .el-p,
+.markdown-preview-view.myhome p:has(+ .block-language-dataviewjs) {
+  /* inline fields paragraph before dataview — handled by %% in reading mode */
+}

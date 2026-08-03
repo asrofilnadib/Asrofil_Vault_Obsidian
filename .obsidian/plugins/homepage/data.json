@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "homepages": {
+    "Asrofil Homepage": {
+      "version": 2,
+      "hasRibbonIcon": true,
+      "openMode": "Replace all open notes",
+      "view": "Reading view",
+      "refreshDataview": true,
+      "autoCreate": false,
+      "autoScroll": false,
+      "pin": true,
+      "commands": [],
+      "openOnStartup": true,
+      "openWhenEmpty": true,
+      "value": "00. Homepage.md",
+      "kind": "File"
+    }
+  },
+  "separateMobile": false
+}

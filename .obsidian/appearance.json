@@ -2,5 +2,16 @@
   "cssTheme": "Atom",
   "showRibbon": true,
   "baseFontSize": 20,
-  "theme": "system"
+  "theme": "system",
+  "enabledCssSnippets": [
+    "homepage-setting",
+    "homepage-setting-mobile",
+    "homepage-fixes",
+    "admonition-col2-col3-flex",
+    "sharetype",
+    "birthday-countdown",
+    "stickies",
+    "admonitions",
+    "colourful-progress-bar"
+  ]
 }

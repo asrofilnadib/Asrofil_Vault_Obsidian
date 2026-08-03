@@ -217,7 +217,21 @@ Fitur wajib dalam tahap awal:
 - [x] ➕ 2026-01-15 membuat dashboard untuk p2h 🔼 📅 2026-01-17 ✅ 2026-01-16
 - [x] ➕ 2026-01-18 Melakukan perancangan integrasi master data P2H dengan sistem Downtime agar setiap perubahan data oleh SPV otomatis tersinkron ke kedua sistem 🔼 📅 2026-01-20 ✅ 2026-01-20
 - [x] ➕ 2026-01-18 Membuat BOT TelegramService untuk memberikan notifikasi kepada teknisi terkait yang di assign oleh Bapak Dani Wiraseno selaku Chief ⏫ 📅 2026-01-21 ✅ 2026-01-20
-- [ ] 
+- [x] ➕ 2026-07-29📅 untuk impact ganti jadi: low; medium; high. Apapun impactnya bakal create ticket 🔼 ✅ 2026-07-30
+  ![[Pasted image 20260729161729.png]]
+- [x] ➕ 2026-07-29 setelah create checklist maka tampilan dari operator adalah checklist yang di create, detail dengan on progress ticket downtime. ✅ 2026-07-30
+- hourse meter di ilangin.
+- Case dimana kalau temuan kerusakan setelah shift jalan, maka operator akses checklist sebelumnya lalu tambah kerusakan
+- secara tampilan form, beri badge atau alert kalau ini
+  - di detail kerusakan tambahin detail kerusakan jadi 4 kategori: mechanical, hidrolik, other, electrical. Kalau other baru detail kerusakan free text
+  - ![[Pasted image 20260729161917.png]]
+  - ![[Pasted image 20260729163349.png]]
+- [x] ➕ 2026-07-29 case kalau shift 1 unit FB-15 kerusakan spion kemudian sampai shift 2 belum dibenerin maka si operator checklist pada unit FB-15 yang sama dengan pengecekan spion dibuat seperti disable gitu dengan label masih rusak atau sedang on progress repairement ✅ 2026-07-30
+- [x] ➕ 2026-07-29 buat halaman display monitoring untuk melihat kerusakan p2h, user ingin tampilannya itu bisa di breakdown berdasarkan hari; impact; unit mhe, jadi gw mikirnya itu dibuat kayak collapse yang turunan turunan terus. ✅ 2026-07-30
+- [x] ➕ 2026-07-29 untuk master data di downtime, mesin dijadikan concat mhe tipe + mhe unit, equipment itu jadinya checklist, dan kerusakan itu cuma ada 4 kategori ✅ 2026-07-30
+  - ![[Pasted image 20260729162847.png]]
+- ![[Pasted image 20260729162940.png]]
+
 # 🕙 Pending
 - [x] minta master data ke pak dani ✅ 2026-01-05
 - [x] buat master data pengecekan untuk masing masing unit ✅ 2026-01-07

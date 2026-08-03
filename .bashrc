@@ -27,6 +27,7 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
 
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -133,7 +134,7 @@ alias gg='gulp'
 # set -o vi              # Uncomment this to get vi-style key bindings
 
 #make new project
-alias lrn='laravel new'
+#alias lrn='laravel new'
 
 #alias
 alias al='alias'
@@ -347,6 +348,7 @@ alias gc="git commit -m"
 alias gp="git push"
 alias gs="git status"
 alias gl="git log"
+alias gpl="git pull"
 #alias gs='git status '
 #alias ga='git add '
 #alias gb='git branch '
@@ -357,12 +359,17 @@ alias gl="git log"
 #alias gx='gitx --all'
 #alias got='git '
 #alias get='git '
+alias grv="git remote -v"
+alias gbr="git branch -r"
 
 # Directory
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
 alias .....="cd ../../../../"
+
+# Dump SQL
+alias dump="cd ~/dumpsql"
 
 # NPM Command
 alias rdev="npm run dev"
@@ -375,7 +382,7 @@ alias proj="cd /mnt/windows-d/Proyek"
 
 # ------------------------------------------------------------
 #-- Path Laravel
-alias laravel="cd /mnt/windows-d/Proyek/Laravel"
+#alias laravel="cd /mnt/windows-d/Proyek/Laravel"
 alias pnm="cd /mnt/windows-d/Proyek/Laravel/graceperiode"
 alias portaljob="cd /mnt/windows-d/Proyek/Laravel/portaljob"
 alias ~="cd ~"
@@ -388,6 +395,7 @@ alias ebhan="cd /mnt/windows-d/Proyek/Laravel/opname"
 alias wpas="cd /mnt/windows-d/Proyek/Laravel/warehouse-pas"
 alias pasd="cd /mnt/windows-d/Proyek/Laravel/newpas-master"
 alias pas="cd /home/asrofil/Project/newpas-master"
+alias form="cd /home/asrofil/Project/compliance-form-app"
 
 #-- CodeIgniter
 alias ci="cd /mnt/windows-d/Proyek/CodeIgniter"
@@ -402,7 +410,7 @@ alias pcv2="cd /mnt/windows-d/Proyek/CodeIgniter/production_control_v2"
 alias wet="cd /mnt/windows-d/Proyek/CodeIgniter/wet-charging"
 
 #-- GO
-alias go="cd /mnt/windows-d/Proyek/GO"
+# alias go="cd /mnt/windows-d/Proyek/GO"
 
 #-- Jupyter Lab
 alias jupe="cd '/mnt/windows-d/Proyek/Jupyter Lab'"
@@ -413,6 +421,10 @@ alias jupe="cd '/mnt/windows-d/Proyek/Jupyter Lab'"
 alias cn='composer create-project codeigniter4/appstarter'
 alias testproject="cd ~/PhpstormProjects/test-project"
 alias pss="php spark serve"
+
+# ------------------------------------------------------------
+alias catastrophy="bash ~/.tmux-catastrophy.sh"
+alias armagedon="bash ~/.tmux-armagedon.sh"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -446,39 +458,47 @@ fi
 
 # Auto start tmux when open a terminal
 if command -v tmux &> /dev/null && [ -z "$TMUX" ] && [ -z "$SSH_TTY" ]; then
-    # Cek apakah session "main" sudah ada
     if tmux has-session -t main 2>/dev/null; then
-        # Session sudah ada, langsung attach
         tmux attach-session -t main
     else
-        # Session belum ada, buat dengan layout preset langsung
         SESSION="main"
-        
-        # Buat session baru
-        tmux new-session -d -s $SESSION
-        
-        # Split kiri-kanan dengan kanan 70% (kiri jadi 30%)
-        tmux split-window -h -p 70 -t $SESSION -c "$HOME"
-        
-        # Pindah ke pane kanan (index 1)
-        tmux select-pane -t $SESSION:0.1
-        
-        # Split pane kanan jadi atas-bawah 50-50
-        tmux split-window -v -t $SESSION:0.1 -c "$HOME"
-        
-        # Jalankan btop di pane kiri (index 0)
+        tmux new-session -d -s $SESSION -n "main" 'clear'
+
+        # Split kiri-kanan: kiri 30% (≈80 char), kanan 70%
+        tmux select-pane -t $SESSION:0
+        tmux split-window -h -p 30 -t $SESSION
+
+        # Jalankan btop di pane kiri
         tmux send-keys -t $SESSION:0.0 'btop' C-m
-        
-        # Clear terminal di pane kanan atas (index 1)
-        tmux send-keys -t $SESSION:0.1 'clear' C-m
-        
-        # Clear terminal di pane kanan bawah (index 2)
-        tmux send-keys -t $SESSION:0.2 'clear' C-m
-        
-        # Fokus ke pane kanan atas
+
+        # Pindah ke pane kanan
         tmux select-pane -t $SESSION:0.1
-        
-        # Attach ke session
+
+        # Split atas-bawah: atas 41%, bawah 59% (≈26 baris)
+        tmux split-window -v -p 59 -t $SESSION:0.1
+
+        # Jalankan neofetch di pane kanan bawah
+        tmux send-keys -t $SESSION:0.2 'neofetch' C-m
+
+        # Pindah ke pane kanan atas
+        tmux select-pane -t $SESSION:0.1
+
+        # Split pane kanan atas jadi kiri-kanan 50-50
+        tmux split-window -h -p 50 -t $SESSION:0.1
+
+        # Clear di kedua pane atas
+        tmux send-keys -t $SESSION:0.1 'clear' C-m
+        tmux send-keys -t $SESSION:0.3 'clear' C-m
+
+        # Resize pane untuk presisi (opsional)
+        tmux resize-pane -t $SESSION:0.0 -x 80   # Lebar 80
+        tmux resize-pane -t $SESSION:0.2 -y 26   # Tinggi 26
+        tmux resize-pane -t $SESSION:0.1 -y 18   # Tinggi 18
+
+        # Fokus ke pane kerja (kiri atas)
+        tmux select-pane -t $SESSION:0.1
+
+        # Attach
         tmux attach-session -t $SESSION
     fi
 fi
@@ -499,3 +519,50 @@ export PATH=$PATH:$HOME/.local/bin
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
+# Composer global bin (WAJIB buat laravel)
+export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+
+# ========================================
+# Docker Aliases - Format Rapih
+# ========================================
+
+# Docker ps dengan format table rapih
+alias dps='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+
+# Docker ps -a dengan format table rapih
+alias dpsa='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"'
+
+# Docker ps hanya nama dan status
+alias dstat='docker ps --format "table {{.Names}}\t{{.Status}}"'
+
+# Docker ps dengan ID pendek (12 karakter)
+alias dpsid='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}" | head -c 12'
+
+# Docker ps sorted by name
+alias dps-sorted='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}" | (sed -u 1q; sort -k1)'
+
+# Docker ps hanya running
+alias dps-running='docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"'
+
+# Docker ps dengan created time
+alias dps-created='docker ps -a --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.CreatedAt}}"'
+
+# Docker images
+alias dmgs='docker images'
+
+# py env
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
+# GO env path
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+alias scrcpy='/home/asrofil/scrcpy-linux-x86_64-v3.3.4/scrcpy --no-clipboard-autosync'
+
+alias mendeley='/home/asrofil/mendeley/mendeley-reference-manager-2.144.0-x86_64.AppImage --no-sandbox'
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin

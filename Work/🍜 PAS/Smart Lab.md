@@ -216,6 +216,8 @@ Identik dengan Noodle 1.
 
 ### Pending
 - [x] ➕ 2025-11-11 halaman /qa/ ketika ingin input nilai parameter dibuat agar request postnya berjalan dibelakang, di view nya kasih field untuk input nilai yang parameternya di klik, begitu enter atau keluar dari field tersebut maka save dari segi backendnya ⏫ ✅ 2025-12-10
+- [x] ➕ 2026-07-29 lab online all-line PRN perbaiki ✅ 2026-07-29
+- ![[Pasted image 20260729163818.png]]
 
 ## Lab Eksternal
 ### User
